@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alfan Azis | Software Developer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Pengaturan Dasar & Variabel Warna */
+        :root {
+            --primary-color: #2563eb;
+            --dark-bg: #0f172a;
+            --card-bg: #1e293b;
+            --text-light: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Navigasi */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px 10%;
+            background-color: rgba(15, 23, 42, 0.9);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .logo { font-size: 1.5rem; font-weight: 700; color: var(--primary-color); }
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            margin-left: 30px;
+            font-weight: 400;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover { color: var(--primary-color); }
+
+        /* Hero Section (Bagian Atas) */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 10%;
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+        }
+
+        .hero h1 { font-size: 4rem; margin-bottom: 10px; line-height: 1.2; }
+        .hero h1 span { color: var(--primary-color); }
+        .hero p { font-size: 1.2rem; color: var(--text-muted); max-width: 600px; margin-bottom: 30px; }
+        
+        .btn {
+            padding: 12px 30px;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background 0.3s, transform 0.3s;
+            display: inline-block;
+        }
+        .btn:hover { background-color: #1d4ed8; transform: translateY(-3px); }
+
+        /* Section Global */
+        section { padding: 100px 10%; }
+        .section-title { font-size: 2.5rem; margin-bottom: 50px; text-align: center; }
+        .section-title span { color: var(--primary-color); }
+
+        /* Grid Keahlian & Proyek */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 12px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .card i { font-size: 2.5rem; color: var(--primary-color); margin-bottom: 20px; }
+        .card h3 { font-size: 1.5rem; margin-bottom: 15px; }
+        .card p { color: var(--text-muted); font-size: 0.95rem; }
+
+        /* Footer */
+        footer { text-align: center; padding: 30px; background-color: #0b1120; color: var(--text-muted); }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">Alfan.Dev</div>
+        <div class="nav-links">
+            <a href="#beranda">Beranda</a>
+            <a href="#keahlian">Keahlian</a>
+            <a href="#proyek">Proyek & Layanan</a>
+        </div>
+    </nav>
+
+    <section id="beranda" class="hero">
+        <p>Halo, selamat datang. Saya</p>
+        <h1>Alfan Azis <span>Herdiansyah</span></h1>
+        <p>Mahasiswa Teknik Informatika yang memiliki *passion* dalam pengembangan perangkat lunak, otomatisasi sistem, dan manajemen infrastruktur jaringan.</p>
+        <div>
+            <a href="#proyek" class="btn"><i class="fa-solid fa-rocket"></i> Lihat Portofolio</a>
+        </div>
+    </section>
+
+    <section id="keahlian">
+        <h2 class="section-title">Fokus <span>Keahlian</span></h2>
+        <div class="grid-container">
+            <div class="card">
+                <i class="fa-brands fa-whatsapp"></i>
+                <h3>Otomatisasi Bot WhatsApp</h3>
+                <p>Pengembangan sistem bot terintegrasi untuk manajemen pesanan, notifikasi stok, dan *broadcast* pesan secara efisien menggunakan kode.</p>
+            </div>
+            <div class="card">
+                <i class="fa-solid fa-server"></i>
+                <h3>Headless Server</h3>
+                <p>Eksplorasi dan konfigurasi perangkat keras menjadi *headless server* yang tangguh untuk *hosting* mandiri dan manajemen data.</p>
+            </div>
+            <div class="card">
+                <i class="fa-solid fa-code"></i>
+                <h3>Web Development</h3>
+                <p>Membangun antarmuka web yang responsif, terstruktur, dan modern dengan mengutamakan performa di berbagai perangkat.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="proyek">
+        <h2 class="section-title">Proyek & <span>Layanan Bisnis</span></h2>
+        <div class="grid-container">
+            <div class="card">
+                <i class="fa-solid fa-key"></i>
+                <h3>Distribusi Akun Premium</h3>
+                <p>Manajemen operasional dan penjualan akun *trial* untuk berbagai aplikasi premium, memastikan transaksi yang cepat dan terkelola dengan baik.</p>
+            </div>
+            <div class="card">
+                <i class="fa-solid fa-file-contract"></i>
+                <h3>Pembuatan Dokumen Akademik</h3>
+                <p>Penyusunan laporan dan dokumen berstandar akademik yang rapi, terstruktur (termasuk *body note*), dan sesuai dengan kaidah penulisan ilmiah.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Alfan Azis Herdiansyah. Crafted with Code.</p>
+    </footer>
+
+</body>
+</html>
