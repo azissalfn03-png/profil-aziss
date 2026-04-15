@@ -21,14 +21,23 @@
     }
 
     /* 2. Perbaikan Tema Terang (Muted Blue dengan Gradasi) */
+  /* Pengaturan Tema Terang (Biru Muda Gradasi) */
     body.theme-light {
-        --bg-color: #f0f9ff; /* Biru awan yang sangat lembut */
-        --card-bg: #e0f2fe; /* Sedikit lebih gelap dari bg agar kartu terlihat */
-        --text-color: #1e293b; /* Teks biru gelap agar kontrasnya pas */
+        --bg-color: #e0f2fe;
+        --card-bg: #f0f9ff;
+        --text-color: #0f172a;
         --text-muted: #475569;
-        --nav-bg: rgba(240, 249, 255, 0.9);
-        /* Gradasi biru yang elegan, tidak terlalu mencolok */
-        --hero-bg: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+        --nav-bg: rgba(224, 242, 254, 0.9);
+        --primary-color: #2563eb;
+        
+        /* Memaksa background menjadi biru gradasi (Bukan putih!) */
+        background: linear-gradient(135deg, #bae6fd 0%, #e0f2fe 100%) !important;
+        color: var(--text-color) !important;
+    }
+
+    /* Membuat section transparan agar gradasi dari body terlihat tembus */
+    body.theme-light section, body.theme-light .hero {
+        background: transparent !important;
     }
     /* 3. Reset Dasar */
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
@@ -179,17 +188,25 @@
     </footer>
 
 </body>
-    <script>
+   <script>
     const btnTheme = document.getElementById('theme-toggle');
     const iconTheme = btnTheme.querySelector('i');
     
+    // Pastikan tema default saat pertama dibuka adalah gelap
+    if (!document.body.classList.contains('theme-dark') && !document.body.classList.contains('theme-light')) {
+        document.body.classList.add('theme-dark');
+    }
+
     btnTheme.addEventListener('click', () => {
-        document.body.classList.toggle('theme-light');
-        
-        if(document.body.classList.contains('theme-light')) {
-            iconTheme.classList.replace('fa-sun', 'fa-moon'); // Ganti jadi ikon bulan
+        // Logika Tukar Guling (Hapus yang lama, pasang yang baru)
+        if(document.body.classList.contains('theme-dark')) {
+            document.body.classList.remove('theme-dark');
+            document.body.classList.add('theme-light');
+            iconTheme.classList.replace('fa-moon', 'fa-sun');
         } else {
-            iconTheme.classList.replace('fa-moon', 'fa-sun'); // Ganti jadi ikon matahari
+            document.body.classList.remove('theme-light');
+            document.body.classList.add('theme-dark');
+            iconTheme.classList.replace('fa-sun', 'fa-moon');
         }
     });
 </script>
