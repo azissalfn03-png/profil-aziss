@@ -8,121 +8,105 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-       <style>
-   /* 1. TEMA MALAM (KEMBALI KE ORIGINAL YANG KEREN) */
-    body.theme-dark, :root {
-        --bg-color: #0f172a;
-        --card-bg: #1e293b;
-        --text-color: #f8fafc;
-        --text-muted: #94a3b8;
-        --nav-bg: rgba(15, 23, 42, 0.9);
-        --primary-color: #3b82f6;
-    }
+        /* 1. VARIABEL TEMA GELAP (DEFAULT) */
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-color: #f8fafc;
+            --text-muted: #94a3b8;
+            --nav-bg: rgba(15, 23, 42, 0.9);
+            --primary-color: #3b82f6;
+            --hero-bg: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+        }
 
-    body.theme-dark {
-        background-color: var(--bg-color) !important;
-        color: var(--text-color) !important;
-    }
+        /* 2. VARIABEL TEMA TERANG (BIRU MUDA GRADASI) */
+        body.theme-light {
+            --bg-color: #e0f2fe;
+            --card-bg: #f0f9ff;
+            --text-color: #0f172a;
+            --text-muted: #475569;
+            --nav-bg: rgba(224, 242, 254, 0.9);
+            --primary-color: #2563eb;
+            --hero-bg: linear-gradient(135deg, #bae6fd 0%, #e0f2fe 100%);
+        }
 
-    body.theme-dark .hero {
-        background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%) !important;
-    }
+        /* 3. RESET & STRUKTUR DASAR */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        html { scroll-behavior: smooth; scroll-padding-top: 90px; }
 
-    /* 2. TEMA SIANG (BIRU GRADASI SEJUK) */
-    body.theme-light {
-        --bg-color: #e0f2fe;
-        --card-bg: #f0f9ff;
-        --text-color: #0f172a;
-        --text-muted: #475569;
-        --nav-bg: rgba(224, 242, 254, 0.9);
-        --primary-color: #2563eb;
+        /* 4. TERAPKAN WARNA OTOMATIS (Tanpa !important) */
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: background-color 0.4s ease, color 0.4s ease;
+        }
+
+        nav {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 10%; background-color: var(--nav-bg);
+            position: fixed; width: 100%; top: 0; z-index: 100;
+            backdrop-filter: blur(10px); transition: background-color 0.4s ease;
+        }
+
+        .logo { font-size: 1.5rem; font-weight: 700; color: var(--primary-color); }
+        .nav-links { display: flex; align-items: center; }
+        .nav-links a {
+            color: var(--text-color); text-decoration: none; margin-left: 30px;
+            font-weight: 400; position: relative; padding-bottom: 5px; transition: color 0.3s;
+        }
+        .nav-links a::after {
+            content: ''; position: absolute; width: 0; height: 2px; bottom: 0; left: 0;
+            background-color: var(--primary-color); transition: width 0.3s ease-in-out;
+        }
+        .nav-links a:hover::after { width: 100%; }
+        .nav-links a:hover { color: var(--primary-color); }
+
+        #theme-toggle {
+            background: none; border: none; color: var(--text-color);
+            font-size: 1.2rem; margin-left: 30px; cursor: pointer; transition: transform 0.3s, color 0.3s;
+        }
+        #theme-toggle:hover { color: var(--primary-color); transform: rotate(20deg); }
+
+        .hero {
+            min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+            padding: 120px 10% 0 10%;
+            background: var(--hero-bg); transition: background 0.4s ease;
+        }
+        .hero h1 { font-size: 4rem; margin-bottom: 10px; line-height: 1.2; }
+        .hero h1 span { color: var(--primary-color); }
+        .hero p { font-size: 1.2rem; color: var(--text-muted); max-width: 600px; margin-bottom: 30px; }
         
-        background: linear-gradient(135deg, #bae6fd 0%, #e0f2fe 100%) !important;
-        color: var(--text-color) !important;
-    }
+        .btn {
+            padding: 12px 30px; background-color: var(--primary-color); color: white;
+            text-decoration: none; border-radius: 8px; font-weight: 600;
+            display: inline-block; border: none; transition: all 0.3s;
+        }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4); }
 
-    body.theme-light section, body.theme-light .hero {
-        background: transparent !important;
-    }
-    /* 3. Reset Dasar */
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+        section { padding: 100px 10%; }
+        .section-title { font-size: 2.5rem; margin-bottom: 50px; text-align: center; }
+        .section-title span { color: var(--primary-color); }
 
-    /* 4. Terapkan Variabel ke Elemen Web */
-    body {
-        background-color: var(--bg-color);
-        color: var(--text-color);
-        line-height: 1.6;
-        transition: all 0.3s ease; /* Transisi warna super mulus */
-    }
+        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .card {
+            background-color: var(--card-bg); padding: 30px; border-radius: 12px;
+            transition: transform 0.3s, box-shadow 0.3s, background-color 0.4s ease;
+            border: 1px solid rgba(148, 163, 184, 0.1);
+        }
+        .card:hover { transform: translateY(-10px); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .card i { font-size: 2.5rem; color: var(--primary-color); margin-bottom: 20px; }
+        .card h3 { font-size: 1.5rem; margin-bottom: 15px; }
+        .card p { color: var(--text-muted); font-size: 0.95rem; }
 
-    nav {
-        display: flex; justify-content: space-between; align-items: center;
-        padding: 20px 10%; background-color: var(--nav-bg);
-        position: fixed; width: 100%; top: 0; z-index: 100;
-        backdrop-filter: blur(10px); transition: all 0.3s ease;
-    }
-
-    .logo { font-size: 1.5rem; font-weight: 700; color: var(--primary-color); }
-    .nav-links { display: flex; align-items: center; }
-    .nav-links a {
-        color: var(--text-color); text-decoration: none; margin-left: 30px;
-        font-weight: 400; position: relative; padding-bottom: 5px; transition: color 0.3s;
-    }
-    .nav-links a::after {
-        content: ''; position: absolute; width: 0; height: 2px; bottom: 0; left: 0;
-        background-color: var(--primary-color); transition: width 0.3s ease-in-out;
-    }
-    .nav-links a:hover::after { width: 100%; }
-    .nav-links a:hover { color: var(--primary-color); }
-
-    #theme-toggle {
-        background: none; border: none; color: var(--text-color);
-        font-size: 1.2rem; margin-left: 30px; cursor: pointer; transition: all 0.3s;
-    }
-    #theme-toggle:hover { color: var(--primary-color); transform: rotate(20deg); }
-
-    .hero {
-        min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
-        padding: 120px 10% 0 10%; /* BUG FIX: Padding atas ditambah agar teks tidak nyangkut */
-        background: var(--hero-bg); transition: background 0.3s;
-    }
-    .hero h1 { font-size: 4rem; margin-bottom: 10px; line-height: 1.2; }
-    .hero h1 span { color: var(--primary-color); }
-    .hero p { font-size: 1.2rem; color: var(--text-muted); max-width: 600px; margin-bottom: 30px; }
-    
-    .btn {
-        padding: 12px 30px; background-color: var(--primary-color); color: white;
-        text-decoration: none; border-radius: 8px; font-weight: 600;
-        display: inline-block; border: none; transition: all 0.3s;
-    }
-    .btn:hover { transform: translateY(-3px); box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4); }
-
-    section { padding: 100px 10%; }
-    .section-title { font-size: 2.5rem; margin-bottom: 50px; text-align: center; }
-    .section-title span { color: var(--primary-color); }
-
-    .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-    .card {
-        background-color: var(--card-bg); padding: 30px; border-radius: 12px;
-        transition: all 0.3s; border: 1px solid rgba(148, 163, 184, 0.1);
-    }
-    .card:hover { transform: translateY(-10px); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-    .card i { font-size: 2.5rem; color: var(--primary-color); margin-bottom: 20px; }
-    .card h3 { font-size: 1.5rem; margin-bottom: 15px; }
-    .card p { color: var(--text-muted); font-size: 0.95rem; }
-
-    footer { text-align: center; padding: 40px; background-color: var(--card-bg); transition: all 0.3s; }
-    .social-links { margin-top: 20px; }
-    .social-links a {
-        display: inline-block; margin: 0 10px; font-size: 1.5rem;
-        color: var(--text-muted); transition: all 0.3s;
-    }
-    .social-links a:hover { color: var(--primary-color); transform: translateY(-3px); }
-</style>
+        footer { text-align: center; padding: 40px; background-color: var(--card-bg); transition: background-color 0.4s ease; }
+        .social-links { margin-top: 20px; }
+        .social-links a { display: inline-block; margin: 0 10px; font-size: 1.5rem; color: var(--text-muted); transition: all 0.3s; }
+        .social-links a:hover { color: var(--primary-color); transform: translateY(-3px); }
     </style>
 </head>
-<body>
+
+<body class="theme-dark">
 
     <nav>
         <div class="logo">Aziss.Dev</div>
@@ -130,8 +114,8 @@
             <a href="#beranda">Beranda</a>
             <a href="#keahlian">Keahlian</a>
             <a href="#proyek">Proyek & Layanan</a>
-            <button id="theme-toggle" style="background:none; border:none; color:#f8fafc; margin-left:30px; cursor:pointer; font-size:1.2rem;">
-            <i class="fa-solid fa-sun"></i>
+            <button id="theme-toggle" title="Ganti Tema">
+                <i class="fa-solid fa-sun"></i>
             </button>
         </div>
     </nav>
@@ -139,7 +123,7 @@
     <section id="beranda" class="hero">
         <p>Halo, selamat datang. Saya</p>
         <h1>Alfan Azis <span>Herdiansyah</span></h1>
-        <p>Mahasiswa Aktif Semseter 2 Teknik Informatika yang memiliki *passion* dalam pengembangan perangkat lunak, otomatisasi sistem, desain gambar, dan manajemen infrastruktur jaringan.</p>
+        <p>Mahasiswa Aktif Semester 2 Teknik Informatika yang memiliki *passion* dalam pengembangan perangkat lunak, otomatisasi sistem, desain gambar, dan manajemen infrastruktur jaringan.</p>
         <div>
             <a href="#proyek" class="btn"><i class="fa-solid fa-rocket"></i> Lihat Portofolio</a>
         </div>
@@ -184,35 +168,30 @@
 
     <footer>
         <p>&copy; 2026 Alfan Azis Herdiansyah. Crafted with Code.</p>
-        <div class="social-links" style="margin-top: 15px;">
-    <a href="https://github.com/azissalfn03-png" target="_blank" style="color: #94a3b8; font-size: 1.5rem; margin: 0 10px;"><i class="fa-brands fa-github"></i></a>
-    <a href="https://tiktok.com/zisslfn" target="_blank" style="color: #94a3b8; font-size: 1.5rem; margin: 0 10px;"><i class="fa-brands fa-tiktok"></i></a>
-    <a href="https://instagram.com/_alfnzs" target="_blank" style="color: #94a3b8; font-size: 1.5rem; margin: 0 10px;"><i class="fa-brands fa-instagram"></i></a>
-    <a href="https://wa.me/6285739246637" target="_blank" style="color: #94a3b8; font-size: 1.5rem; margin: 0 10px;"><i class="fa-brands fa-whatsapp"></i></a>
-</div>
+        <div class="social-links">
+            <a href="https://github.com/azissalfn03-png" target="_blank" title="GitHub"><i class="fa-brands fa-github"></i></a>
+            <a href="https://tiktok.com/zisslfn" target="_blank" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="https://instagram.com/_alfnzs" target="_blank" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://wa.me/6285739246637" target="_blank" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
     </footer>
 
-</body>
-   <script>
-    const btnTheme = document.getElementById('theme-toggle');
-    const iconTheme = btnTheme.querySelector('i');
-    
-    // Pastikan tema default saat pertama dibuka adalah gelap
-    if (!document.body.classList.contains('theme-dark') && !document.body.classList.contains('theme-light')) {
-        document.body.classList.add('theme-dark');
-    }
+    <script>
+        const btnTheme = document.getElementById('theme-toggle');
+        const iconTheme = btnTheme.querySelector('i');
 
-    btnTheme.addEventListener('click', () => {
-        // Logika Tukar Guling (Hapus yang lama, pasang yang baru)
-        if(document.body.classList.contains('theme-dark')) {
-            document.body.classList.remove('theme-dark');
-            document.body.classList.add('theme-light');
-            iconTheme.classList.replace('fa-moon', 'fa-sun');
-        } else {
-            document.body.classList.remove('theme-light');
-            document.body.classList.add('theme-dark');
-            iconTheme.classList.replace('fa-sun', 'fa-moon');
-        }
-    });
-</script>
+        btnTheme.addEventListener('click', () => {
+            // Tukar antara mode gelap dan terang
+            document.body.classList.toggle('theme-light');
+            document.body.classList.toggle('theme-dark');
+
+            // Ganti ikon sesuai dengan tema yang sedang aktif
+            if(document.body.classList.contains('theme-light')) {
+                iconTheme.className = 'fa-solid fa-moon'; // Munculkan ikon bulan saat mode siang
+            } else {
+                iconTheme.className = 'fa-solid fa-sun'; // Munculkan ikon matahari saat mode malam
+            }
+        });
+    </script>
+</body>
 </html>
