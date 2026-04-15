@@ -142,6 +142,17 @@
         /* Footer */
         footer { text-align: center; padding: 30px; background-color: #0b1120; color: var(--text-muted); }
     </style>
+        /* Warna untuk Tema Terang */
+    body.theme-light {
+        --dark-bg: #f8fafc;
+        --card-bg: #ffffff;
+        --text-light: #0f172a;
+        --text-muted: #475569;
+    }
+    body.theme-light nav { background-color: rgba(248, 250, 252, 0.9); }
+    body.theme-light footer { background-color: #e2e8f0; color: #0f172a; }
+    body.theme-light .card { border: 1px solid #e2e8f0; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+    body.theme-light #theme-toggle { color: #0f172a !important; }
 </head>
 <body>
 
@@ -151,6 +162,9 @@
             <a href="#beranda">Beranda</a>
             <a href="#keahlian">Keahlian</a>
             <a href="#proyek">Proyek & Layanan</a>
+            <button id="theme-toggle" style="background:none; border:none; color:#f8fafc; margin-left:30px; cursor:pointer; font-size:1.2rem;">
+            <i class="fa-solid fa-sun"></i>
+            </button>
         </div>
     </nav>
 
@@ -202,7 +216,26 @@
 
     <footer>
         <p>&copy; 2026 Alfan Azis Herdiansyah. Crafted with Code.</p>
+        <div class="social-links" style="margin-top: 15px;">
+    <a href="https://github.com/zisslfn" target="_blank" style="color: #94a3b8; font-size: 1.5rem; margin: 0 10px;"><i class="fa-brands fa-tiktok"></i></a>
+    <a href="https://instagram.com/_alfnzs" target="_blank" style="color: #94a3b8; font-size: 1.5rem; margin: 0 10px;"><i class="fa-brands fa-instagram"></i></a>
+    <a href="https://wa.me/6285739246637" target="_blank" style="color: #94a3b8; font-size: 1.5rem; margin: 0 10px;"><i class="fa-brands fa-whatsapp"></i></a>
+</div>
     </footer>
 
 </body>
+    <script>
+    const btnTheme = document.getElementById('theme-toggle');
+    const iconTheme = btnTheme.querySelector('i');
+    
+    btnTheme.addEventListener('click', () => {
+        document.body.classList.toggle('theme-light');
+        
+        if(document.body.classList.contains('theme-light')) {
+            iconTheme.classList.replace('fa-sun', 'fa-moon'); // Ganti jadi ikon bulan
+        } else {
+            iconTheme.classList.replace('fa-moon', 'fa-sun'); // Ganti jadi ikon matahari
+        }
+    });
+</script>
 </html>
