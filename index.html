@@ -8,148 +8,104 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* Pengaturan Dasar & Variabel Warna */
-        :root {
-            --primary-color: #2563eb;
-            --dark-bg: #0f172a;
-            --card-bg: #1e293b;
-            --text-light: #f8fafc;
-            --text-muted: #94a3b8;
-        }
+       <style>
+    /* 1. Variabel Warna Global (Default: Tema Gelap) */
+    :root {
+        --primary-color: #2563eb;
+        --bg-color: #0f172a;
+        --card-bg: #1e293b;
+        --text-color: #f8fafc;
+        --text-muted: #94a3b8;
+        --nav-bg: rgba(15, 23, 42, 0.9);
+        --hero-bg: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+    }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-            
-        }
-        html {
-            scroll-behavior: smooth; /* Membuat perpindahan halaman meluncur mulus */
-            scroll-padding-top: 90px; /* Mencegah judul section tertutup navbar saat di-scroll */
-        }
-        
-        body {
-            background-color: var(--dark-bg);
-            color: var(--text-light);
-            line-height: 1.6;
-        }
+    /* 2. Variabel saat Tema Terang Aktif */
+    body.theme-light {
+        --bg-color: #f8fafc;
+        --card-bg: #ffffff;
+        --text-color: #0f172a;
+        --text-muted: #475569;
+        --nav-bg: rgba(248, 250, 252, 0.9);
+        --hero-bg: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    }
 
-        /* Navigasi */
-        nav {
-            display: flex;
-            justify-content: space-between;
-            padding: 20px 10%;
-            background-color: rgba(15, 23, 42, 0.9);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 100;
-            backdrop-filter: blur(10px);
-        }
+    /* 3. Reset Dasar */
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
 
-        .logo { font-size: 1.5rem; font-weight: 700; color: var(--primary-color); }
-        .nav-links a {
-            color: var(--text-light);
-            text-decoration: none;
-            margin-left: 30px;
-            font-weight: 400;
-            position: relative; /* Wajib untuk membuat animasi garis bawah */
-            padding-bottom: 5px;
-        }
-        
-        /* Membuat garis bawah yang awalnya tersembunyi (width: 0) */
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: 0;
-            left: 0;
-            background-color: var(--primary-color);
-            transition: width 0.3s ease-in-out; /* Animasi memanjang selama 0.3 detik */
-        }
-        
-        /* Memunculkan garis bawah saat disentuh mouse (width: 100%) */
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-        
-        .nav-links a:hover { 
-            color: var(--primary-color); 
-        }
+    /* 4. Terapkan Variabel ke Elemen Web */
+    body {
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        line-height: 1.6;
+        transition: all 0.3s ease; /* Transisi warna super mulus */
+    }
 
-        /* Hero Section (Bagian Atas) */
-        .hero {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 0 10%;
-            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
-        }
+    nav {
+        display: flex; justify-content: space-between; align-items: center;
+        padding: 20px 10%; background-color: var(--nav-bg);
+        position: fixed; width: 100%; top: 0; z-index: 100;
+        backdrop-filter: blur(10px); transition: all 0.3s ease;
+    }
 
-        .hero h1 { font-size: 4rem; margin-bottom: 10px; line-height: 1.2; }
-        .hero h1 span { color: var(--primary-color); }
-        .hero p { font-size: 1.2rem; color: var(--text-muted); max-width: 600px; margin-bottom: 30px; }
-        
-        .btn {
-            padding: 12px 30px;
-            background-color: var(--primary-color);
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 600;
-            transition: background 0.3s, transform 0.3s;
-            display: inline-block;
-        }
-        .btn:hover { background-color: #1d4ed8; transform: translateY(-3px); }
-        
-        .btn:active {
-            transform: translateY(0); /* Tombol seolah tertekan saat diklik */
-            box-shadow: 0 2px 10px rgba(37, 99, 235, 0.4);
-        }
-        
-        /* Section Global */
-        section { padding: 100px 10%; }
-        .section-title { font-size: 2.5rem; margin-bottom: 50px; text-align: center; }
-        .section-title span { color: var(--primary-color); }
+    .logo { font-size: 1.5rem; font-weight: 700; color: var(--primary-color); }
+    .nav-links { display: flex; align-items: center; }
+    .nav-links a {
+        color: var(--text-color); text-decoration: none; margin-left: 30px;
+        font-weight: 400; position: relative; padding-bottom: 5px; transition: color 0.3s;
+    }
+    .nav-links a::after {
+        content: ''; position: absolute; width: 0; height: 2px; bottom: 0; left: 0;
+        background-color: var(--primary-color); transition: width 0.3s ease-in-out;
+    }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-links a:hover { color: var(--primary-color); }
 
-        /* Grid Keahlian & Proyek */
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
+    #theme-toggle {
+        background: none; border: none; color: var(--text-color);
+        font-size: 1.2rem; margin-left: 30px; cursor: pointer; transition: all 0.3s;
+    }
+    #theme-toggle:hover { color: var(--primary-color); transform: rotate(20deg); }
 
-        .card {
-            background-color: var(--card-bg);
-            padding: 30px;
-            border-radius: 12px;
-            transition: transform 0.3s, box-shadow 0.3s;
-            border: 1px solid rgba(255,255,255,0.05);
-        }
-        
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
+    .hero {
+        min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+        padding: 120px 10% 0 10%; /* BUG FIX: Padding atas ditambah agar teks tidak nyangkut */
+        background: var(--hero-bg); transition: background 0.3s;
+    }
+    .hero h1 { font-size: 4rem; margin-bottom: 10px; line-height: 1.2; }
+    .hero h1 span { color: var(--primary-color); }
+    .hero p { font-size: 1.2rem; color: var(--text-muted); max-width: 600px; margin-bottom: 30px; }
+    
+    .btn {
+        padding: 12px 30px; background-color: var(--primary-color); color: white;
+        text-decoration: none; border-radius: 8px; font-weight: 600;
+        display: inline-block; border: none; transition: all 0.3s;
+    }
+    .btn:hover { transform: translateY(-3px); box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4); }
 
-        .card i { font-size: 2.5rem; color: var(--primary-color); margin-bottom: 20px; }
-        .card h3 { font-size: 1.5rem; margin-bottom: 15px; }
-        .card p { color: var(--text-muted); font-size: 0.95rem; }
+    section { padding: 100px 10%; }
+    .section-title { font-size: 2.5rem; margin-bottom: 50px; text-align: center; }
+    .section-title span { color: var(--primary-color); }
 
-        /* Footer */
-        footer { text-align: center; padding: 30px; background-color: #0b1120; color: var(--text-muted); }
-            /* Memperbaiki kuncian warna di bagian atas (Hero) */
-        body.theme-light .hero {
-            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-        }
-        
-        /* Memperbaiki warna teks menu agar terbaca di tema terang */
-        body.theme-light .nav-links a {
-            color: #0f172a;
-        }
+    .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+    .card {
+        background-color: var(--card-bg); padding: 30px; border-radius: 12px;
+        transition: all 0.3s; border: 1px solid rgba(148, 163, 184, 0.1);
+    }
+    .card:hover { transform: translateY(-10px); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+    .card i { font-size: 2.5rem; color: var(--primary-color); margin-bottom: 20px; }
+    .card h3 { font-size: 1.5rem; margin-bottom: 15px; }
+    .card p { color: var(--text-muted); font-size: 0.95rem; }
+
+    footer { text-align: center; padding: 40px; background-color: var(--card-bg); transition: all 0.3s; }
+    .social-links { margin-top: 20px; }
+    .social-links a {
+        display: inline-block; margin: 0 10px; font-size: 1.5rem;
+        color: var(--text-muted); transition: all 0.3s;
+    }
+    .social-links a:hover { color: var(--primary-color); transform: translateY(-3px); }
+</style>
     </style>
 </head>
 <body>
