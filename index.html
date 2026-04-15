@@ -9,19 +9,26 @@
     
     <style>
        <style>
-    /* 1. Perbaikan Tema Gelap (Deep Navy Slate) */
-   :root {
-        --primary-color: #2563eb;
+   /* 1. TEMA MALAM (KEMBALI KE ORIGINAL YANG KEREN) */
+    body.theme-dark, :root {
         --bg-color: #0f172a;
         --card-bg: #1e293b;
         --text-color: #f8fafc;
         --text-muted: #94a3b8;
         --nav-bg: rgba(15, 23, 42, 0.9);
-        --hero-bg: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+        --primary-color: #3b82f6;
     }
 
-    /* 2. Perbaikan Tema Terang (Muted Blue dengan Gradasi) */
-  /* Pengaturan Tema Terang (Biru Muda Gradasi) */
+    body.theme-dark {
+        background-color: var(--bg-color) !important;
+        color: var(--text-color) !important;
+    }
+
+    body.theme-dark .hero {
+        background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%) !important;
+    }
+
+    /* 2. TEMA SIANG (BIRU GRADASI SEJUK) */
     body.theme-light {
         --bg-color: #e0f2fe;
         --card-bg: #f0f9ff;
@@ -30,12 +37,10 @@
         --nav-bg: rgba(224, 242, 254, 0.9);
         --primary-color: #2563eb;
         
-        /* Memaksa background menjadi biru gradasi (Bukan putih!) */
         background: linear-gradient(135deg, #bae6fd 0%, #e0f2fe 100%) !important;
         color: var(--text-color) !important;
     }
 
-    /* Membuat section transparan agar gradasi dari body terlihat tembus */
     body.theme-light section, body.theme-light .hero {
         background: transparent !important;
     }
