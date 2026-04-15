@@ -22,8 +22,13 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Poppins', sans-serif;
+            
         }
-
+        html {
+            scroll-behavior: smooth; /* Membuat perpindahan halaman meluncur mulus */
+            scroll-padding-top: 90px; /* Mencegah judul section tertutup navbar saat di-scroll */
+        }
+        
         body {
             background-color: var(--dark-bg);
             color: var(--text-light);
@@ -49,9 +54,30 @@
             text-decoration: none;
             margin-left: 30px;
             font-weight: 400;
-            transition: color 0.3s;
+            position: relative; /* Wajib untuk membuat animasi garis bawah */
+            padding-bottom: 5px;
         }
-        .nav-links a:hover { color: var(--primary-color); }
+        
+        /* Membuat garis bawah yang awalnya tersembunyi (width: 0) */
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease-in-out; /* Animasi memanjang selama 0.3 detik */
+        }
+        
+        /* Memunculkan garis bawah saat disentuh mouse (width: 100%) */
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .nav-links a:hover { 
+            color: var(--primary-color); 
+        }
 
         /* Hero Section (Bagian Atas) */
         .hero {
@@ -78,7 +104,12 @@
             display: inline-block;
         }
         .btn:hover { background-color: #1d4ed8; transform: translateY(-3px); }
-
+        
+        .btn:active {
+            transform: translateY(0); /* Tombol seolah tertekan saat diklik */
+            box-shadow: 0 2px 10px rgba(37, 99, 235, 0.4);
+        }
+        
         /* Section Global */
         section { padding: 100px 10%; }
         .section-title { font-size: 2.5rem; margin-bottom: 50px; text-align: center; }
